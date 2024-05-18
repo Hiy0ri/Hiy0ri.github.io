@@ -1,2 +1,106 @@
-var atumVersion='20240424141344';
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('(4(){1 M=4(6){b(!6){X.U("W,6[5],6[7]");14}1 n=6.7;1 s=6.5;1 T=6.v;1 r=6.e;1 o=6.g;4 I(a,d){1 2=c.y(\'2\');2.w=\'10/x-D\';2.G=\'12 D\';2.E=a;c.A(\'8\')[0].t(2)};4 p(a,d){1 8=d||c.A(\'8\')[0];1 2=c.y(\'2\');2.w=\'H/7\';2.G=\'13\';2.E=a;8.t(2)};4 l(a,d,j){1 3=c.y("3");3.w="H/Z";b(j){b(3.q){3.F=4(){b(3.q=="Y"||3.q=="1h"){3.F=1i;j()}}}1f{3.1g=4(){j()}}}3.1j=a;1 8=d||c.A(\'8\')[0];8.t(3)};$(4(){1 f=$("<C 1a=f></C>");$("2").17();$("z").7("18","1d");$("#1e").7("1b","1c");$("z").19(f);I(T);L(n.k>0){p(n.i(),\'\')}(4(){b(s.k>0){l(s.i(),\'\',R.K)}})();L(r.k>0){p(r.i(),\'\')}(4(){b(o.k>0){l(o.i(),\'\',R.K)}})()})};1 9=1k.9||{};1 B=9.B||"P://Q.O.J/N/1m/";1 u=9.u||"1l";1 m=9.m||"P://Q.O.J/N/V/z/15.v";1 e=9.e||[];1 g=9.g||[];1 h=B+u+"/";1 S={7:[h+"7/f.7"],5:[h+"5/16.5",h+"5/11.5",h+"5/f.5",],e:e,g:g,v:m,};M(S)})();',62,85,'|var|link|script|function|js|param|css|head|__BLOG_CONFIG__|url|if|document|dom|extCss|app|extJs|staticPath|shift|callback|length|dynamicLoadJs|staticIco|c_css|c_extJs|dynamicLoadCss|readyState|c_extCss|c_js|appendChild|staticVer|ico|type||createElement|body|getElementsByTagName|staticSrc|div|icon|href|onreadystatechange|rel|text|dynamicLoadIco|io|callee|while|cnblogLoader|blog_theme_atum|gitee|https|cjunn|arguments|staticParam|c_ico|log|img|缺少必要参数|console|loaded|javascript|image|vendor|shortcut|stylesheet|return|miao|manifest|remove|overflow|append|id|display|none|hidden|home|else|onload|complete|null|src|window|$atumVersion|releases'.replace("$atumVersion",atumVersion).split('|'),0,{}))
+(function(){
+  var cnblogLoader = function(param) {
+    if (!param) {
+      console.log("缺少必要参数,param[js],param[css]");
+      return;
+    }
+    var c_css = param.css;
+    var c_js = param.js;
+    var c_ico = param.ico;
+    var c_extCss = param.extCss;
+    var c_extJs = param.extJs;
+
+    function dynamicLoadIco(url, dom) {
+      var link = document.createElement('link');
+      link.type = 'image/x-icon';
+      link.rel = 'shortcut icon';
+      link.href = url;
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+
+    function dynamicLoadCss(url, dom) {
+      var head = dom || document.getElementsByTagName('head')[0];
+      var link = document.createElement('link');
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      link.href = url;
+      head.appendChild(link);
+    }
+
+    function dynamicLoadJs(url, dom, callback) {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      if (callback) {
+        if (script.readyState) {
+          script.onreadystatechange = function () {
+            if (script.readyState == "loaded" || script.readyState == "complete") {
+              script.onreadystatechange = null;
+              callback();
+            }
+          }
+        } else {
+          script.onload = function () {
+            callback();
+          }
+        }
+      }
+      script.src = url;
+      var head = dom || document.getElementsByTagName('head')[0];
+      head.appendChild(script);
+    }
+
+    $(function() {
+      var app = $("<div id=app></div>");
+      $("link").remove();
+      /*删除所有除头页的消息*/
+      $("body").css("overflow", "hidden");
+      $("#home").css("display", "none");
+      $("body").append(app);
+      /*加载图标*/
+      dynamicLoadIco(c_ico);
+      /*加载所有CSS*/
+      while (c_css.length > 0) {
+        dynamicLoadCss(c_css.shift(), '');
+      }
+      /*同步加载JS*/
+      (function () {
+        if (c_js.length > 0) {
+          dynamicLoadJs(c_js.shift(), '', arguments.callee);
+        }
+      })();
+
+
+      /*加载扩展Css*/
+      while (c_extCss.length > 0) {
+        dynamicLoadCss(c_extCss.shift(), '');
+      }
+      /*加载扩展JS*/
+      (function () {
+        if (c_extJs.length > 0) {
+          dynamicLoadJs(c_extJs.shift(), '', arguments.callee);
+        }
+      })();
+    });
+  };
+
+  var __BLOG_CONFIG__ = window.__BLOG_CONFIG__ || {};
+  var staticSrc = __BLOG_CONFIG__.staticSrc || "https://Hiy0ri.github.io/releases/";
+  var staticVer = __BLOG_CONFIG__.staticVer || "20240424141344";
+  var staticIco = __BLOG_CONFIG__.staticIco || "https://cjunn.gitee.io/c_cnblog_vue/img/body/miao.ico";
+  var extCss = __BLOG_CONFIG__.extCss || [];
+  var extJs = __BLOG_CONFIG__.extJs || [];
+  var staticPath = staticSrc + staticVer + "/";
+  var staticParam = {
+    css: [staticPath + "css/app.css"],
+    js: [
+      staticPath + "js/manifest.js",
+      staticPath + "js/vendor.js",
+      staticPath + "js/app.js",
+    ],
+    extCss: extCss,
+    extJs: extJs,
+    ico: staticIco,
+  };
+  cnblogLoader(staticParam);
+})();
+
